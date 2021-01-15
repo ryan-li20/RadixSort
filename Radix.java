@@ -37,12 +37,21 @@ public class Radix extends SortableLinkedList{
       buckets[i] = new SortableLinkedList();
     }
     for(int element = 0; element < data.size(); element++){//first pass - ones and maxDigits
+      int temp = data.get(0);
+      boolean cycled = false;
+      if(digits(data.get(0)) > maxDigits){
+        temp = data.get(0);
+        data.add(data.remove(0));
+        cycled = true;
+        maxDigits = digits(temp);
+      }
+
       for(int bNum = 0; bNum < 10; bNum++){
-        if(digits(data.get(element)) > maxDigits){
-          maxDigits = digits(data.get(element));
-        }
-        if(nth(data.get(element), 0) == bNum){
-          buckets[bNum].add(data.get(element));
+        if(nth(temp, 0) == bNum){
+          buckets[bNum].add(temp);
+          if(!cycled){
+            data.add(data.remove(0));
+          }
           break;
         }
       }
@@ -58,10 +67,10 @@ public class Radix extends SortableLinkedList{
     for(int dig = 1; dig < maxDigits; dig++){
       for(int i = 0; i < data.size(); i++){
         for(int j = 0; j < 10; j++){
-          if(digits(data.get(i)) > maxDigits){
-          }
-          if(nth(data.get(i), dig) == j){
-            buckets[j].add(data.get(i));
+          if(nth(data.get(0), dig) == j){
+            int temp = data.get(0);
+            data.add(data.remove(0));
+            buckets[j].add(temp);
             break;
           }
         }
