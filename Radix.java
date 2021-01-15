@@ -47,7 +47,9 @@ public class Radix extends SortableLinkedList{
         }
       }
     }
-    // data = new SortableLinkedList();
+    while(data.size() > 0){
+      data.remove(0);
+    }
     merge(data, buckets);
     if(maxDigits < 2){
       return;
@@ -64,15 +66,11 @@ public class Radix extends SortableLinkedList{
           }
         }
       }
-      // data = new SortableLinkedList();
+      while(data.size() > 0){
+        data.remove(0);
+      }
       merge(data, buckets);
     }
-    // System.out.println("what happened");
-    // System.out.println(data.toString());
-    // System.out.println(master.toString());
-    // master = data;
-    // System.out.println(master.toString());
-    // System.out.println("sandwich");
   }
 
   public static void radixSort(SortableLinkedList data){
@@ -87,12 +85,6 @@ public class Radix extends SortableLinkedList{
       newG.add(guy);
       newA[i] = guy;
     }
-    // System.out.println(Arrays.toString(newA));
-    // System.out.println("lo" + newG.toString());
-    // radixSortSimple(newG);
-    // System.out.println(newG.toString());
-    // Arrays.sort(newA);
-    // System.out.println(Arrays.toString(newA));
   }
 
 }
